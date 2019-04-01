@@ -1,40 +1,40 @@
 ---
 id: strict-mode
-title: Strict Mode
+title: Strict Modu
 permalink: docs/strict-mode.html
 ---
 
-`StrictMode` is a tool for highlighting potential problems in an application. Like `Fragment`, `StrictMode` does not render any visible UI. It activates additional checks and warnings for its descendants.
+`StrictMode`, bir uygulamadaki olası sorunları vurgulamak için bir araçtır. `Fragment` gibi, `StrictMode` da görünür bir UI oluşturmaz. Alt elemanları için ek kontroller ve uyarılar başlatır.
 
-> Note:
+> Not:
 >
-> Strict mode checks are run in development mode only; _they do not impact the production build_.
+> Strict mod denetimleri yalnızca geliştirme modunda çalıştırılır; _üretim derlemesini etkilemezler_.
 
-You can enable strict mode for any part of your application. For example:
+Uygulamanızın herhangi bir bölümü için strict modu etkinleştirebilirsiniz. Örneğin:
 `embed:strict-mode/enabling-strict-mode.js`
 
-In the above example, strict mode checks will *not* be run against the `Header` and `Footer` components. However, `ComponentOne` and `ComponentTwo`, as well as all of their descendants, will have the checks.
+Yukarıdaki örnekte, strict mod denetimleri `Header` ve `Footer` bileşenlerine karşı *çalıştırılmaz*. Bununla birlikte, `ComponentOne` ve `ComponentTwo`, tüm alt elemanları gibi, kontrollere sahip olacak.
 
-`StrictMode` currently helps with:
-* [Identifying components with unsafe lifecycles](#identifying-unsafe-lifecycles)
-* [Warning about legacy string ref API usage](#warning-about-legacy-string-ref-api-usage)
-* [Warning about deprecated findDOMNode usage](#warning-about-deprecated-finddomnode-usage)
-* [Detecting unexpected side effects](#detecting-unexpected-side-effects)
-* [Detecting legacy context API](#detecting-legacy-context-api)
+`StrictMode`'un şu anda yardımcı olduğu konular:
+* [Güvenilmez yaşam döngüleri olan bileşenleri belirleme](#identifying-unsafe-lifecycles)
+* [Eski string ref API kullanımı hakkında uyarma](#warning-about-legacy-string-ref-api-usage)
+* [Kullanımdan kaldırılmış findDOMNode kullanımı hakkında uyarma](#warning-about-deprecated-finddomnode-usage)
+* [Beklenmeyen yan etkileri tespit etme](#detecting-unexpected-side-effects)
+* [Eski context API'ını tespit etme](#detecting-legacy-context-api)
 
-Additional functionality will be added with future releases of React.
+Ek fonksiyonellikler, gelecekteki React sürümleri ile eklenecek.
 
-### Identifying unsafe lifecycles {#identifying-unsafe-lifecycles}
+### Güvenilmez yaşam döngülerini belirleme {#identifying-unsafe-lifecycles}
 
-As explained [in this blog post](/blog/2018/03/27/update-on-async-rendering.html), certain legacy lifecycle methods are unsafe for use in async React applications. However, if your application uses third party libraries, it can be difficult to ensure that these lifecycles aren't being used. Fortunately, strict mode can help with this!
+[Bu blog gönderisinde](/blog/2018/03/27/update-on-async-rendering.html) açıklandığı gibi, bazı eski yaşam döngüsü metotları asenkron React uygulamalarında kullanım için güvenli değildir. Bununla birlikte, eğer uygulamanız üçüncü taraf kütüphaneleri kullanıyorsa, bu yaşam döngülerinin kullanılmadığından emin olmak zor olabilir. Neyse ki, strict mod bu konuda yardımcı olabilir!
 
-When strict mode is enabled, React compiles a list of all class components using the unsafe lifecycles, and logs a warning message with information about these components, like so:
+Strict mod etkinleştirildiğinde, React güvensiz yaşam döngülerini kullanarak tüm sınıf bileşenlerinin bir listesini oluşturur ve bu bileşenler hakkındaki bilgileri içeren şöyle bir uyarı mesajı loglar:
 
 ![](../images/blog/strict-mode-unsafe-lifecycles-warning.png)
 
-Addressing the issues identified by strict mode _now_ will make it easier for you to take advantage of async rendering in future releases of React.
+Strict mod tarafından belirlenen sorunların ele alınması _şimdi_, gelecekteki React sürümlerinde asenkron render etme işleminden yararlanmanızı kolaylaştıracak.
 
-### Warning about legacy string ref API usage {#warning-about-legacy-string-ref-api-usage}
+### Eski string ref API kullanımı hakkında uyarma {#warning-about-legacy-string-ref-api-usage}
 
 Previously, React provided two ways for managing refs: the legacy string ref API and the callback API. Although the string ref API was the more convenient of the two, it had [several downsides](https://github.com/facebook/react/issues/1373) and so our official recommendation was to [use the callback form instead](/docs/refs-and-the-dom.html#legacy-api-string-refs).
 
